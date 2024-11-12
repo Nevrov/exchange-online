@@ -1,0 +1,23 @@
+\\https://learn.microsoft.com/en-us/powershell/exchange/exchange-online-powershell-v2?view=exchange-ps#updates-for-version-300-the-exo-v3-module
+\\install the powershell module https://www.powershellgallery.com/packages/ExchangeOnlineManagement/
+\\the version 2.0.5 or later of the exchange online powershell module requires the Microsoft .NET Framework 4.7.2 or later to connect. Otherwise, you get a System.Runtime.InteropServices.OSPlatform error
+\\The latest versions of the module are officially supported in PowerShell 7
+
+\\Prerequisites for the Exchange Online PowerShell module
+\\Set the PowerShell execution policy to RemoteSigned
+Set-ExecutionPolicy RemoteSigned
+
+\\Turn on Basic authentication in WinRM
+\\enable WinRM, run the following command:
+
+winrm quickconfig
+winrm get winrm/config/client/auth
+\\has to be value Basic = true
+\\if not run
+winrm set winrm/config/client/auth '@{Basic="true"}'
+
+\\to install the latest public version of the module, run
+Install-Module -Name ExchangeOnlineManagement -Scope CurrentUser
+
+\\To see the version of the module that's currently installed and where it's installed
+Get-InstalledModule ExchangeOnlineManagement | Format-List Name,Version,InstalledLocation
